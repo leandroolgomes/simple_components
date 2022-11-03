@@ -40,3 +40,6 @@ A simple class that implements Lifecycle class. A component can depend on other 
 
 ### System
 The main component that manages all system components. All components are stored as a directed graph with no cycles(tree).
+
+#### Demo App
+You can find a simple demo on `demo_app.js`. Just type `node demo_app.js` and voilá!
