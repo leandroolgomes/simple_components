@@ -51,4 +51,6 @@ test('should traverse graph', () => {
     g = dep.depends(g, 'a', 'e')
 
     expect(dep.sortedNodes(g)).toEqual(new Set(['e', 'a', 'b', 'c', 'd']))
+
+    expect(dep.reverveSortedNodes(g)).toEqual(new Set(['e', 'a', 'b', 'c', 'd'].reverse()))
 });

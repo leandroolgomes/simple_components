@@ -1,22 +1,4 @@
-// let graph = {
-//     dependencies : {},
-//     dependents   : {}
-// }
-
-
-//       :a
-//      / |
-//    :b  |
-//      \ |
-//       :c
-//        |
-//       :d
-
-// depends(g, b, a)
-// depends(g, c, b)
-// depends(g, c, a)
-// depends(g, d, c)
-
+const createGraph = () => { return {dependencies : {}, dependents   : {} }}
 
 const depends = (graph, node, dep) => {
     if(node === dep) throw new Error('Circular dependency!')
@@ -62,11 +44,15 @@ const sortedNodes = (graph) => {
     let nodes = getAllNodes(graph)
     let sorted = new Set()
     nodes?.forEach(n => {
-        traverseNode(graph, sorted, n)
+        traverseNode(graph, sorted, n)        
         sorted.add(n)
     })
 
-    return sorted
+    return new Set(Array.from(sorted).filter((s) => (s !== 'undefined' && s !== undefined)))
 }
 
-module.exports = { depends, getTransactiveDependencies, sortedNodes }
+const reverveSortedNodes = (graph) => {
+    return new Set(Array.from(sortedNodes(graph)).reverse())
+}
+
+module.exports = { createGraph, depends, getTransactiveDependencies, sortedNodes, reverveSortedNodes }
