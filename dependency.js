@@ -34,16 +34,6 @@ const depends = (graph, node, dep) => {
     return graph
 }
 
-const removeEdge = (graph, node, dep) => {
-    if(!graph.dependencies[dep]) graph.dependencies[dep] = []
-    var indexNode = graph.dependencies[dep].indexOf(node);
-    if(indexNode > -1) graph.dependencies.splice(indexNode, 1)    
-
-    if(!graph.dependents[node]) graph.dependents[node] = []
-    var indexDep = graph.dependents[dep].indexOf(dep);
-    if(indexDep > -1) graph.dependents.splice(indexDep, 1)    
-}
-
 const getTransactiveDependencies = (graph, node) => {
     let deps = graph?.dependencies[node]
     let t = new Set()
@@ -56,4 +46,27 @@ const getTransactiveDependencies = (graph, node) => {
     return t
 }
 
-module.exports = { depends, getTransactiveDependencies }
+const getAllNodes = (g) => {
+    return new Set(Object.keys(g.dependencies).concat(Object.keys(g.dependents)))
+}
+
+const traverseNode = (graph, sorted, node) => {
+    const deps = graph.dependencies[node]
+    deps?.forEach(d => {
+        if(!sorted.has(d)) traverseNode(graph, sorted, d)
+        sorted.add(d)
+    })
+}
+
+const sortedNodes = (graph) => {
+    let nodes = getAllNodes(graph)
+    let sorted = new Set()
+    nodes?.forEach(n => {
+        traverseNode(graph, sorted, n)
+        sorted.add(n)
+    })
+
+    return sorted
+}
+
+module.exports = { depends, getTransactiveDependencies, sortedNodes }

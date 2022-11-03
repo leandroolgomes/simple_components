@@ -10,11 +10,6 @@ test('should build a simple graph', () => {
     g = dep.depends(g, 'c', 'b')
     g = dep.depends(g, 'c', 'a')
     g = dep.depends(g, 'd', 'c')
-    g = dep.depends(g, 'c', 'e')
-    
-    console.log(g)
-
-    console.log(new Set(Object.keys(g.dependencies).concat(Object.keys(g.dependents))))
 
     expect(Object.keys(g.dependencies)).toEqual(['b', 'c', 'd'])
     expect(Object.keys(g.dependents)).toEqual(['a', 'b', 'c'])
@@ -41,4 +36,19 @@ test('should retrieve all transitive dependencies', () => {
     expect(dep.getTransactiveDependencies(g1, undefined)).toEqual(new Set())
     expect(dep.getTransactiveDependencies(undefined, ['a'])).toEqual(new Set())
     expect(dep.getTransactiveDependencies(undefined, undefined)).toEqual(new Set())
+});
+
+test('should traverse graph', () => {
+    let g = {
+        dependencies : {},
+        dependents   : {}
+    }    
+    
+    g = dep.depends(g, 'b', 'a')
+    g = dep.depends(g, 'c', 'b')
+    g = dep.depends(g, 'c', 'a')
+    g = dep.depends(g, 'd', 'c')
+    g = dep.depends(g, 'a', 'e')
+
+    expect(dep.sortedNodes(g)).toEqual(new Set(['e', 'a', 'b', 'c', 'd']))
 });
