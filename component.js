@@ -52,4 +52,13 @@ class System extends Lifecycle {
     }
 }
 
-module.exports = {System, Lifecycle}
+const define = (comp, dependencies) => 
+    (componentKey, system) => system.addComponent(componentKey, comp, dependencies)
+
+const createSystem = (systemMap) => {
+    const system = new System()
+    Object.keys(systemMap).forEach(k => systemMap[k](k, system))
+    return system
+}
+
+module.exports = {Lifecycle, define, createSystem}

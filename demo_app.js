@@ -9,6 +9,15 @@ class Config extends components.Lifecycle {
     }
 }
 
+class ConfigMock extends components.Lifecycle {
+    start(context) {
+       return { http_port: 4000 }
+    }
+
+    stop(context) {
+    }
+}
+
 class AppRoutes extends components.Lifecycle {
     start(context) {
        return (app) => {
@@ -45,10 +54,18 @@ class HttpServer extends components.Lifecycle {
     }
 }
 
-const system = new components.System()
-system.addComponent('config', new Config())
-system.addComponent('http_server', new HttpServer(), ['app_routes', 'config'])
-system.addComponent('app_routes', new AppRoutes())
+const base = {
+    config:      components.define(new Config()),
+    http_server: components.define(new HttpServer(), ['app_routes', 'config']),
+    app_routes:  components.define(new AppRoutes())
+}
+
+const test = {
+    ...base,
+    ...{ config:      components.define(new ConfigMock()) }
+}
+
+const system = components.createSystem(base)
 
 const startSystem = (system) => {
     system.start()
