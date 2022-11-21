@@ -1,12 +1,12 @@
 {
-  "name": "simple-components",
-  "version": "1.0.0",
+  "name": "@leandroolgomes/simple-components",
+  "version": "0.1.0",
   "description": "",
   "main": "dependency.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
+  "author": "leandroolgomes",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.2.2"
