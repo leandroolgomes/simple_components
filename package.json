@@ -1,8 +1,8 @@
 {
   "name": "@leandroolgomes/simple-components",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
-  "main": "dependency.js",
+  "main": "component.js",
   "scripts": {
     "test": "jest"
   },
