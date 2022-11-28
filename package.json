@@ -9,6 +9,7 @@
   "author": "leandroolgomes",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^29.2.2"
+    "jest": "^29.2.2",
+    "semver": "^7.3.7"
   }
 }
