@@ -2,13 +2,14 @@
   "name": "@leandroolgomes/simple-components",
   "version": "0.1.2",
   "description": "",
-  "main": "src/component.js",
+  "main": "demo_app.js",
   "scripts": {
-    "test": "jest"
+    "start": "node demo_app.js"
   },
   "author": "leandroolgomes",
   "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.2.2"
+  "dependencies": {
+    "express": "^4.18.2",
+    "@leandroolgomes/simple-components": "file:../"
   }
 }

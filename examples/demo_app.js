@@ -1,4 +1,4 @@
-const components = require('./component')
+const components = require('@leandroolgomes/simple-components')
 
 class Config extends components.Lifecycle {
     start(context) {
