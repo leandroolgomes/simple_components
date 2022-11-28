@@ -1,4 +1,6 @@
 ### Simple Components
+![build workflow](https://github.com/leandroolgomes/simple_components/actions/workflows/build.yml/badge.svg)
+
 
 This project defines a simple component management system.
 
